@@ -1,3 +1,14 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import type { Movie } from '@/types/movie'
 
@@ -39,14 +50,53 @@ export function MovieCard({ movie, index, onDelete }: Props) {
       {/* action column */}
       <div className="flex items-center self-start pt-2">
         {onDelete && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onDelete(movie._id)}
-            className="text-[10px] uppercase tracking-marquee text-muted-foreground opacity-0 transition-all duration-300 hover:bg-destructive/10 hover:text-destructive group-hover:opacity-100"
-          >
-            Delete Movie
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="rounded-none text-[10px] uppercase tracking-marquee text-muted-foreground opacity-0 transition-all duration-300 hover:bg-destructive/10 hover:text-destructive group-hover:opacity-100"
+              >
+                Delete Movie
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="rounded-none border border-border bg-popover p-0 ring-0 sm:max-w-lg">
+              <div className="film-strip h-1 w-full opacity-50" />
+              <div className="space-y-6 px-8 pt-7 pb-2">
+                <div className="flex items-center justify-between text-[10px] uppercase tracking-marquee text-muted-foreground">
+                  <span className="font-mono">No. {typeof index === 'number' ? String(index + 1).padStart(3, '0') : '—'}</span>
+                  <span className="text-destructive">Delete · confirm</span>
+                </div>
+                <AlertDialogHeader className="space-y-4">
+                  <AlertDialogTitle asChild>
+                    <h2 className="font-display text-3xl font-light leading-tight tracking-tight text-foreground sm:text-4xl">
+                      Remove{' '}
+                      <span className="italic text-primary">
+                        &ldquo;{movie.title}&rdquo;
+                      </span>
+                      ?
+                    </h2>
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-sm leading-relaxed text-muted-foreground">
+                    This entry will be permanently struck from the catalog.
+                    The reel cannot be rewound.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+              </div>
+              <AlertDialogFooter className="m-0 flex-row items-stretch gap-0 rounded-none border-t border-border bg-transparent p-0">
+                <AlertDialogCancel className="m-0 flex-1 rounded-none border-0 border-r border-border bg-transparent text-[11px] uppercase tracking-marquee text-muted-foreground hover:bg-muted/50 hover:text-foreground">
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  variant="destructive"
+                  onClick={() => onDelete(movie._id)}
+                  className="m-0 flex-1 rounded-none bg-transparent text-[11px] uppercase tracking-marquee text-destructive hover:bg-destructive hover:text-foreground"
+                >
+                  Confirm Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         )}
       </div>
     </article>
