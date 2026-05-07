@@ -44,12 +44,7 @@ export function SearchPage() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h1 className="text-2xl font-semibold">Search</h1>
-        <p className="text-sm text-muted-foreground">
-          Type to search by title. Results update 500ms after you stop typing.
-        </p>
-      </div>
+      <h1 className="text-2xl font-semibold">Search Movies</h1>
 
       <Input
         value={query}

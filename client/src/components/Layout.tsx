@@ -21,8 +21,8 @@ export function Layout() {
           <NavLink to="/add-movie" className={navLinkClass}>
             Add Movie
           </NavLink>
-          <NavLink to="/search" className={navLinkClass}>
-            Search
+          <NavLink to="/search-movies" className={navLinkClass}>
+            Search Movies
           </NavLink>
         </nav>
       </header>

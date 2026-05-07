@@ -14,7 +14,7 @@ function App() {
           <Route index element={<Navigate to="/all-movies" replace />} />
           <Route path="all-movies" element={<MoviesPage />} />
           <Route path="add-movie" element={<UploadPage />} />
-          <Route path="search" element={<SearchPage />} />
+          <Route path="search-movies" element={<SearchPage />} />
         </Route>
       </Routes>
       <Toaster />
