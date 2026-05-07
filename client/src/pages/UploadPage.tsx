@@ -10,6 +10,7 @@ export function UploadPage() {
   const [genre, setGenre] = useState('')
   const [description, setDescription] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [generating, setGenerating] = useState(false)
 
   function getError(): string | null {
     if (title.length < 1) return 'Title is required (at least 1 character).'
@@ -17,6 +18,31 @@ export function UploadPage() {
     if (genre.length < 1) return 'Genre is required (at least 1 character).'
     if (description.length > 200) return 'Description must be at most 200 characters.'
     return null
+  }
+
+  async function handleGenerate() {
+    if (!title.trim() || !genre.trim()) {
+      alert('Please fill in title and genre first.')
+      return
+    }
+    setGenerating(true)
+    try {
+      const res = await fetch(`${API_URL}/movies/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, genre }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? `HTTP ${res.status}`)
+      }
+      const data = (await res.json()) as { description: string }
+      setDescription(data.description)
+    } catch (err) {
+      alert((err as Error).message)
+    } finally {
+      setGenerating(false)
+    }
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -62,11 +88,22 @@ export function UploadPage() {
         placeholder="Genre"
       />
 
-      <Input
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-      />
+      <div className="space-y-2">
+        <Input
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+        />
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={handleGenerate}
+          disabled={generating}
+        >
+          {generating ? 'Generating...' : '✨ Generate description with AI'}
+        </Button>
+      </div>
 
       <Button type="submit" disabled={submitting}>
         {submitting ? 'Adding...' : 'Add Movie'}
