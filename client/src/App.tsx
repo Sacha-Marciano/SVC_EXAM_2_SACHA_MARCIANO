@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from '@/components/Layout'
 import { MoviesPage } from '@/pages/MoviesPage'
 import { UploadPage } from '@/pages/UploadPage'
@@ -11,7 +11,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<MoviesPage />} />
+          <Route index element={<Navigate to="/all-movies" replace />} />
+          <Route path="all-movies" element={<MoviesPage />} />
           <Route path="upload" element={<UploadPage />} />
           <Route path="search" element={<SearchPage />} />
         </Route>

@@ -15,8 +15,8 @@ export function Layout() {
       <header className="border-b">
         <nav className="mx-auto flex max-w-5xl items-center gap-2 p-4">
           <span className="mr-4 text-lg font-semibold">Watchlist</span>
-          <NavLink to="/" end className={navLinkClass}>
-            Movies
+          <NavLink to="/all-movies" className={navLinkClass}>
+            All Movies
           </NavLink>
           <NavLink to="/upload" className={navLinkClass}>
             Upload
