@@ -1,8 +1,29 @@
 import { Router, type Request, type Response } from 'express'
+import { generateObject } from 'ai'
+import { z } from 'zod'
 import { MovieModel } from '../models/movie.ts'
 import type { MovieInput } from '../types/movie.ts'
 
 const router = Router()
+
+// POST /movies/generate
+router.post('/generate', async (req: Request, res: Response) => {
+  const { title, genre } = req.body ?? {}
+  if (!title || !genre) {
+    return res.status(400).json({ error: 'title and genre are required' })
+  }
+
+  try {
+    const { object } = await generateObject({
+      model: 'openai/gpt-4o-mini',
+      schema: z.object({ description: z.string() }),
+      prompt: `Write a short, engaging description (1-2 sentences, max 200 characters) for a movie titled "${title}" in the genre "${genre}". Return JSON only.`,
+    })
+    res.json(object)
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message })
+  }
+})
 
 // GET /movies/search?name=...
 router.get('/search', async (req: Request, res: Response) => {

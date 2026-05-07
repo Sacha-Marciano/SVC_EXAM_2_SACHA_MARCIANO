@@ -9,11 +9,13 @@
     "seed": "tsx src/scripts/seed.ts"
   },
   "dependencies": {
+    "ai": "^6.0.175",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.6.1",
-    "tsx": "^4.21.0"
+    "tsx": "^4.21.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
