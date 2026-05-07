@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout'
 import { MoviesPage } from '@/pages/MoviesPage'
 import { UploadPage } from '@/pages/UploadPage'
 import { SearchPage } from '@/pages/SearchPage'
+import { Toaster } from '@/components/ui/sonner'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="search" element={<SearchPage />} />
         </Route>
       </Routes>
+      <Toaster />
     </BrowserRouter>
   )
 }
