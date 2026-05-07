@@ -53,7 +53,7 @@ export function MoviesPage() {
   }
 
   if (movies.length === 0) {
-    return <p className="text-muted-foreground">No movies yet. Add one from the Upload page.</p>
+    return <p className="text-muted-foreground">No movies yet. Add one from the Add Movie page.</p>
   }
 
   return (

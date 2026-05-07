@@ -18,8 +18,8 @@ export function Layout() {
           <NavLink to="/all-movies" className={navLinkClass}>
             All Movies
           </NavLink>
-          <NavLink to="/upload" className={navLinkClass}>
-            Upload
+          <NavLink to="/add-movie" className={navLinkClass}>
+            Add Movie
           </NavLink>
           <NavLink to="/search" className={navLinkClass}>
             Search
